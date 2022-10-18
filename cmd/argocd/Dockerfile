@@ -15,6 +15,8 @@ WORKDIR /go/src/argocd
 
 # Copy all the files from the host into the container
 COPY . .
+COPY ./argo.go argocd/
+COPY ./config.go argocd/
 
 # Compile the action - the added flags instruct Go to produce a
 # standalone binary
