@@ -15,8 +15,8 @@ WORKDIR /go/src/argocd
 
 # Copy all the files from the host into the container
 COPY . .
-COPY ./argo.go argocd/
-COPY ./config.go argocd/
+# COPY ./argo.go argocd/
+# COPY ./config.go argocd/
 
 # Compile the action - the added flags instruct Go to produce a
 # standalone binary
@@ -40,7 +40,7 @@ RUN upx -q -9 /bin/action
 
 # Use the most basic and empty container - this container has no
 # runtime, files, shell, libraries, etc.
-FROM scratch
+FROM quay.io/argoproj/argocd
 
 # Copy over SSL certificates from the first step - this is required
 # if our code makes any outbound SSL connections because it contains

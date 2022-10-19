@@ -9,6 +9,9 @@ inputs:
   fruit: 
     description: Name of fruit to mask
     required: true
+  labels:
+    description: list of labels
+
 outputs:
   time: # id of output
     description: 'The time we greeted you'
