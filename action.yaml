@@ -11,12 +11,12 @@ inputs:
     required: true
   labels:
     description: list of labels
-
+  
 outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
   using: 'docker'
-  image: docker://mithungudipati/argocd:latest
+  image: docker://870846709430.dkr.ecr.us-west-1.amazonaws.com/foo1@sha256:d45a3acb103397e7d826c7c7aa882f3cbcca0693eaaa1e1f5c8c9bc5a25f8002
   # args:
   #   - ${{ inputs.who-to-greet }}

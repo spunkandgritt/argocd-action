@@ -14,6 +14,7 @@ func main() {
 	app := cli.NewApp()
 
 	app.Action = argoCmd
+
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "lang",
@@ -25,6 +26,11 @@ func main() {
 			EnvVar: "INPUT_FRUIT",
 			Usage:  "Name of fruit",
 		},
+		cli.StringSliceFlag{
+			Name:  "labels",
+			Value: "INPUT_LABELS",
+			Usage: "labels",
+		},
 	}
 
 	err := app.Run(os.Args)
@@ -32,7 +38,10 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
+func getLabels(i string) []string {
+	labels1 := strings.Split(os.Getenv(i), "\n")
+	return labels1
+}
 func GetInput(i string) string {
 	e := strings.ReplaceAll(i, " ", "_")
 	e = strings.ToUpper(e)
@@ -40,7 +49,9 @@ func GetInput(i string) string {
 	return strings.TrimSpace(os.Getenv(e))
 }
 func argoCmd(c *cli.Context) error {
-	fmt.Println("fruit repo is: ", c.String("fruit"))
+	for _, value := range c.StringSlice("labels") {
+		fmt.Printf("labels are - %d\n", value)
+	}
 	cmd := exec.Command("argocd", "help")
 
 	// cmd.Stdin = strings.NewReader("and old falcon")
