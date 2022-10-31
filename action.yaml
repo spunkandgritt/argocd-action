@@ -26,7 +26,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-          docker login --username {{ inputs.docker_username }} --password {{ inputs.docker_password }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
+          docker login --username ${{ inputs.docker_username }} --password ${{ inputs.docker_password }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
           docker pull 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
           docker run 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
       shell: bash
