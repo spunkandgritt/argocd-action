@@ -25,14 +25,14 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - id: retrieve_password
+    - id: action_retrieve_password
       name: Retrieve ECR password and store as secret
       env:
         AWS_DEFAULT_REGION: us-east-1
       run: echo "::set-output name=ecr_password1::$(aws ecr get-login-password)"
       shell: bash
     - run: |
-          docker login --username ${{ inputs.docker_username }} --password ${{ steps.retrieve_password.outputs.ecr_password1 }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
+          docker login --username ${{ inputs.docker_username }} --password ${{ steps.action_retrieve_password.outputs.ecr_password1 }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
           docker pull 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
           docker run 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest 
       shell: bash
