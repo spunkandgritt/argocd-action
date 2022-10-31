@@ -11,12 +11,24 @@ inputs:
     required: true
   labels:
     description: list of labels
+  docker_username:
+    description: Docker username
+    required: true
+    default: 'AWS'
+  docker_password:
+    description: Docker password
+    required: true
   
 outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
-  using: 'docker'
-  image: docker://870846709430.dkr.ecr.us-west-1.amazonaws.com/foo1@sha256:d45a3acb103397e7d826c7c7aa882f3cbcca0693eaaa1e1f5c8c9bc5a25f8002
+  using: "composite"
+  steps:
+    - run: |
+          docker login --username $docker_username --password $docker_password 870846709430.dkr.ecr.us-east-1.amazonaws.com
+          docker pull 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
+          docker run 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
+      shell: bash
   # args:
   #   - ${{ inputs.who-to-greet }}
