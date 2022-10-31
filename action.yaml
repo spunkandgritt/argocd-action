@@ -32,6 +32,7 @@ runs:
       run: echo "::set-output name=ecr_password1::$(aws ecr get-login-password)"
       shell: bash
     - run: |
+          echo "using git sha $GITHUB_SHA"
           docker login --username ${{ inputs.docker_username }} --password ${{ steps.action_retrieve_password.outputs.ecr_password1 }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
           docker pull 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
           docker run 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest 
