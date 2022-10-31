@@ -30,6 +30,7 @@ runs:
       env:
         AWS_DEFAULT_REGION: us-east-1
       run: echo "::set-output name=ecr_password1::$(aws ecr get-login-password)"
+      shell: bash
     - run: |
           docker login --username ${{ inputs.docker_username }} --password ${{ steps.retrieve_password.outputs.ecr_password1 }} 870846709430.dkr.ecr.us-east-1.amazonaws.com
           docker pull 870846709430.dkr.ecr.us-east-1.amazonaws.com/foo1:latest
